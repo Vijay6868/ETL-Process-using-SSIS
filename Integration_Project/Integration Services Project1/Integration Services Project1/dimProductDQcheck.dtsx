@@ -1,0 +1,3369 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/4/2022 1:22:39 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="VIJAY_PC"
+  DTS:CreatorName="VIJAY_PC\saroy"
+  DTS:DTSID="{706E2182-82BC-4229-8A9A-9C23757D5DD4}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.845.0"
+  DTS:LocaleID="5129"
+  DTS:ObjectName="dimProductDQcheck"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{F616B33B-CF1D-49F4-BFBE-D87816C09F0D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[VIJAY_PC.DW_Assingment2]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C86BAFDE-5536-426F-9231-F05366EDDEE0}"
+      DTS:ObjectName="VIJAY_PC.DW_Assingment2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=VIJAY_PC;Initial Catalog=DW_Assingment2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{C86BAFDE-5536-426F-9231-F05366EDDEE0}VIJAY_PC.DW_Assingment2;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[VIJAY_PC.salemodels]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9AFF7981-CB4E-4AF9-A349-AA7226EBF8DA}"
+      DTS:ObjectName="VIJAY_PC.salemodels">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=VIJAY_PC;Initial Catalog=salemodels;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-dimProductDQcheck-{9AFF7981-CB4E-4AF9-A349-AA7226EBF8DA}VIJAY_PC.salemodels;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[VIJAY_PC.sales_AU_NZ]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{66842E60-BDCF-470C-B1B8-973AE48E280F}"
+      DTS:ObjectName="VIJAY_PC.sales_AU_NZ">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=VIJAY_PC;Initial Catalog=sales_AU_NZ;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{66842E60-BDCF-470C-B1B8-973AE48E280F}VIJAY_PC.sales_AU_NZ;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5E0CF16F-6382-48D5-996C-AE6057E1D6E6}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\buyPrice -ve to +ve"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="buyPrice -ve to +ve"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\buyPrice -ve to +ve.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\buyPrice -ve to +ve.Inputs[Derived Column Input].Columns[buyPrice]"
+                      cachedDataType="numeric"
+                      cachedName="buyPrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[buyPrice]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ABS](#{Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[buyPrice]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ABS(buyPrice)</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\buyPrice -ve to +ve.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\buyPrice -ve to +ve.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\buyPrice -ve to +ve.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\buyPrice -ve to +ve.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\buyPrice -ve to +ve.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\buyPrice -ve to +ve.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\buyPrice -ve to +ve.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\buyPrice -ve to +ve.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[buyPrice]"
+                      cachedDataType="numeric"
+                      cachedName="buyPrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[buyPrice]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[MSRP]"
+                      cachedDataType="numeric"
+                      cachedName="MSRP"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[MSRP]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[buyPrice is -ve]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="buyPrice is -ve"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[buyPrice]} &lt; 0</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">buyPrice &lt; 0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[MSRP is -ve]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="MSRP is -ve"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[MSRP]} &lt; 0</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">MSRP &lt; 0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[MSRP below then buyPrice]"
+                  description="Output 3 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="MSRP below then buyPrice"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[MSRP]} &lt; #{Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[buyPrice]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">MSRP &lt; buyPrice</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">2</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [salemodels].[productlines]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [salemodels].[productlines]) [refTable]
+where [refTable].[productLine] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="productLine" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="textDescription" dataType="DT_STR" length="4000" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="htmlDescription" dataType="DT_TEXT" length="0" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="image" dataType="DT_IMAGE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productLine]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[VIJAY_PC.salemodels]"
+                  connectionManagerRefId="Package.ConnectionManagers[VIJAY_PC.salemodels]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Lookup.Inputs[Lookup Input].Columns[productLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productLine"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productLine]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">productLine</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[textDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[textDescription]"
+                      name="textDescription"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">textDescription</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Lookup_Column_productLine"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup_Column_productLine"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[productline]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[productline]) [refTable]
+where [refTable].[productLine] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="productLine" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="textDescription" dataType="DT_STR" length="4000" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="htmlDescription" dataType="DT_TEXT" length="0" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="pimage" dataType="DT_IMAGE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productLine]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Lookup_Column_productLine.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[VIJAY_PC.sales_AU_NZ]"
+                  connectionManagerRefId="Package.ConnectionManagers[VIJAY_PC.sales_AU_NZ]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Lookup_Column_productLine.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Lookup_Column_productLine.Inputs[Lookup Input].Columns[productLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productLine"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productLine]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">productLine</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Lookup_Column_productLine.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Data Flow Task\Lookup_Column_productLine.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Lookup_Column_productLine.Outputs[Lookup Match Output].Columns[textDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\Lookup_Column_productLine.Outputs[Lookup Match Output].Columns[textDescription]"
+                      name="textDescription"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">textDescription</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Lookup_Column_productLine.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Data Flow Task\Lookup_Column_productLine.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Lookup_Column_productLine.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Data Flow Task\Lookup_Column_productLine.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Lookup_Column_productLine.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Lookup_Column_productLine.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Lookup_Column_productLine.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Lookup_Column_productLine.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\MSRP -ve to +ve"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="MSRP -ve to +ve"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\MSRP -ve to +ve.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\MSRP -ve to +ve.Inputs[Derived Column Input].Columns[MSRP]"
+                      cachedDataType="numeric"
+                      cachedName="MSRP"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[MSRP]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ABS](#{Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[MSRP]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ABS(MSRP)</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\MSRP -ve to +ve.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\MSRP -ve to +ve.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\MSRP -ve to +ve.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\MSRP -ve to +ve.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\MSRP -ve to +ve.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\MSRP -ve to +ve.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MSRP -ve to +ve.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\MSRP -ve to +ve.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[dimProduct]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[VIJAY_PC.DW_Assingment2]"
+                  connectionManagerRefId="Package.ConnectionManagers[VIJAY_PC.DW_Assingment2]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[productCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="productCode"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productCode]"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[productName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="70"
+                      cachedName="productName"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productName]"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[productLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productLine"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productLine]"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productLine]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[productscale]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="productscale"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productscale]"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productscale]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[productVendor]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productVendor"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productVendor]"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productVendor]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[quantityInStock]"
+                      cachedDataType="i2"
+                      cachedName="quantityInStock"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantityInStock]"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[quantityInStock]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[buyPrice]"
+                      cachedDataType="numeric"
+                      cachedName="buyPrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[buyPrice]"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[buyPrice]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MSRP]"
+                      cachedDataType="numeric"
+                      cachedName="MSRP"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MSRP]"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[MSRP]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[productDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="productDescription"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productDescription]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productKey]"
+                      dataType="i4"
+                      name="productKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="productCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="70"
+                      name="productName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productscale]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="productscale" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productVendor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="productVendor" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      codePage="1252"
+                      dataType="text"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantityInStock]"
+                      dataType="i2"
+                      name="quantityInStock" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[buyPrice]"
+                      dataType="numeric"
+                      name="buyPrice"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MSRP]"
+                      dataType="numeric"
+                      name="MSRP"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="productLine" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[textDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4000"
+                      name="textDescription" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[salemodels].[product]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[VIJAY_PC.salemodels]"
+                  connectionManagerRefId="Package.ConnectionManagers[VIJAY_PC.salemodels]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[productCode]"
+                      length="15"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productCode]"
+                      name="productCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[productName]"
+                      length="70"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productName]"
+                      name="productName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productLine]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[productLine]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productLine]"
+                      name="productLine"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productScale]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[productScale]"
+                      length="10"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productScale]"
+                      name="productScale"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productVendor]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[productVendor]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productVendor]"
+                      name="productVendor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productDescription]"
+                      codePage="1252"
+                      dataType="text"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[productDescription]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productDescription]"
+                      name="productDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[quantityInStock]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[quantityInStock]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[quantityInStock]"
+                      name="quantityInStock"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[buyPrice]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[buyPrice]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[buyPrice]"
+                      name="buyPrice"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MSRP]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MSRP]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MSRP]"
+                      name="MSRP"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[productCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="productCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[productName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="70"
+                      name="productName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[productLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="productLine" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[productScale]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="productScale" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[productVendor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="productVendor" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[productDescription]"
+                      codePage="1252"
+                      dataType="text"
+                      name="productDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[quantityInStock]"
+                      dataType="i2"
+                      name="quantityInStock" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[buyPrice]"
+                      dataType="numeric"
+                      name="buyPrice"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MSRP]"
+                      dataType="numeric"
+                      name="MSRP"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[productCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[productCode]"
+                      name="productCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[productName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="70"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[productName]"
+                      name="productName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[productLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[productLine]"
+                      name="productLine" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[productScale]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[productScale]"
+                      name="productScale" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[productVendor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[productVendor]"
+                      name="productVendor" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[productDescription]"
+                      codePage="1252"
+                      dataType="text"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[productDescription]"
+                      name="productDescription" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[quantityInStock]"
+                      dataType="i2"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[quantityInStock]"
+                      name="quantityInStock" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[buyPrice]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[buyPrice]"
+                      name="buyPrice"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MSRP]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MSRP]"
+                      name="MSRP"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\sales_au_nz_product"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="sales_au_nz_product"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[product]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\sales_au_nz_product.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[VIJAY_PC.sales_AU_NZ]"
+                  connectionManagerRefId="Package.ConnectionManagers[VIJAY_PC.sales_AU_NZ]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[productCode]"
+                      length="15"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productCode]"
+                      name="productCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[productName]"
+                      length="70"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productName]"
+                      name="productName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productLine]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[productLine]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productLine]"
+                      name="productLine"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productscale]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[productscale]"
+                      length="10"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productscale]"
+                      name="productscale"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productVendor]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[productVendor]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productVendor]"
+                      name="productVendor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productDescription]"
+                      codePage="1252"
+                      dataType="text"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[productDescription]"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productDescription]"
+                      name="productDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[quantityInStock]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[quantityInStock]"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[quantityInStock]"
+                      name="quantityInStock"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[buyPrice]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[buyPrice]"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[buyPrice]"
+                      name="buyPrice"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[MSRP]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[MSRP]"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[MSRP]"
+                      name="MSRP"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[productCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="productCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[productName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="70"
+                      name="productName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[productLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="productLine" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[productscale]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="productscale" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[productVendor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="productVendor" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[productDescription]"
+                      codePage="1252"
+                      dataType="text"
+                      name="productDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[quantityInStock]"
+                      dataType="i2"
+                      name="quantityInStock" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[buyPrice]"
+                      dataType="numeric"
+                      name="buyPrice"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].ExternalColumns[MSRP]"
+                      dataType="numeric"
+                      name="MSRP"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[productCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[productCode]"
+                      name="productCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[productName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="70"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[productName]"
+                      name="productName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[productLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[productLine]"
+                      name="productLine" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[productscale]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[productscale]"
+                      name="productscale" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[productVendor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[productVendor]"
+                      name="productVendor" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[productDescription]"
+                      codePage="1252"
+                      dataType="text"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[productDescription]"
+                      name="productDescription" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[quantityInStock]"
+                      dataType="i2"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[quantityInStock]"
+                      name="quantityInStock" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[buyPrice]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[buyPrice]"
+                      name="buyPrice"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[MSRP]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[MSRP]"
+                      name="MSRP"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[productCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="productCode"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productCode]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[productName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="70"
+                      cachedName="productName"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[productLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productLine"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productLine]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[productscale]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="productscale"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productscale]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[productVendor]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productVendor"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productVendor]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[productDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="productDescription"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productDescription]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[quantityInStock]"
+                      cachedDataType="i2"
+                      cachedName="quantityInStock"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[quantityInStock]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[buyPrice]"
+                      cachedDataType="numeric"
+                      cachedName="buyPrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[buyPrice]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[MSRP]"
+                      cachedDataType="numeric"
+                      cachedName="MSRP"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[MSRP]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productCode]"
+                      name="productCode"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productCode]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="70"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productName]"
+                      name="productName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productLine]"
+                      name="productLine">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productLine]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productscale]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productscale]"
+                      name="productscale">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productscale]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productVendor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productVendor]"
+                      name="productVendor">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productVendor]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productDescription]"
+                      codePage="1252"
+                      dataType="text"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productDescription]"
+                      name="productDescription">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productDescription]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[quantityInStock]"
+                      dataType="i2"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[quantityInStock]"
+                      name="quantityInStock">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[quantityInStock]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[buyPrice]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[buyPrice]"
+                      name="buyPrice"
+                      precision="10"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[buyPrice]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[MSRP]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[MSRP]"
+                      name="MSRP"
+                      precision="10"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[MSRP]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[productCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="productCode"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[productName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="70"
+                      cachedName="productName"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[productLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productLine"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productLine]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productLine]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[productscale]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="productscale"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productscale]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productscale]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[productVendor]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productVendor"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productVendor]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productVendor]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[productDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="productDescription"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[productDescription]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productDescription]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[quantityInStock]"
+                      cachedDataType="i2"
+                      cachedName="quantityInStock"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[quantityInStock]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[quantityInStock]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[buyPrice]"
+                      cachedDataType="numeric"
+                      cachedName="buyPrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[buyPrice]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[buyPrice]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[MSRP]"
+                      cachedDataType="numeric"
+                      cachedName="MSRP"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output].Columns[MSRP]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[MSRP]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[textDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4000"
+                      cachedName="textDescription"
+                      lineageId="Package\Data Flow Task\Lookup_Column_productLine.Outputs[Lookup Match Output].Columns[textDescription]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[textDescription]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[productCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="productCode"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[productName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="70"
+                      cachedName="productName"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[productLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productLine"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productLine]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productLine]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[productVendor]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productVendor"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productVendor]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productVendor]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[productDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="productDescription"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productDescription]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productDescription]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[quantityInStock]"
+                      cachedDataType="i2"
+                      cachedName="quantityInStock"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[quantityInStock]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[quantityInStock]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[buyPrice]"
+                      cachedDataType="numeric"
+                      cachedName="buyPrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[buyPrice]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[buyPrice]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[MSRP]"
+                      cachedDataType="numeric"
+                      cachedName="MSRP"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[MSRP]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[MSRP]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[textDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4000"
+                      cachedName="textDescription"
+                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[textDescription]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[textDescription]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[productScale]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="productScale"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[productScale]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productscale]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productCode]"
+                      name="productCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="70"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productName]"
+                      name="productName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productLine]"
+                      name="productLine" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productscale]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productscale]"
+                      name="productscale" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productVendor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productVendor]"
+                      name="productVendor" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productDescription]"
+                      codePage="1252"
+                      dataType="text"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[productDescription]"
+                      name="productDescription" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[quantityInStock]"
+                      dataType="i2"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[quantityInStock]"
+                      name="quantityInStock" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[buyPrice]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[buyPrice]"
+                      name="buyPrice"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[MSRP]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[MSRP]"
+                      name="MSRP"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[textDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[textDescription]"
+                      name="textDescription" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Union All 1"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All 1"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[productCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="productCode"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[productName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="70"
+                      cachedName="productName"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[productLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productLine"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productLine]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productLine]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[productscale]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="productscale"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productscale]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productscale]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[productVendor]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productVendor"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productVendor]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productVendor]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[productDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="productDescription"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productDescription]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productDescription]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[quantityInStock]"
+                      cachedDataType="i2"
+                      cachedName="quantityInStock"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[quantityInStock]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[quantityInStock]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[buyPrice]"
+                      cachedDataType="numeric"
+                      cachedName="buyPrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[buyPrice]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[buyPrice]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1].Columns[MSRP]"
+                      cachedDataType="numeric"
+                      cachedName="MSRP"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[MSRP]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[MSRP]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[productCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="productCode"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[productName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="70"
+                      cachedName="productName"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[productLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productLine"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productLine]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productLine]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[productscale]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="productscale"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productscale]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productscale]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[productVendor]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productVendor"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productVendor]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productVendor]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[productDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="productDescription"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productDescription]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productDescription]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[quantityInStock]"
+                      cachedDataType="i2"
+                      cachedName="quantityInStock"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[quantityInStock]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[quantityInStock]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[buyPrice]"
+                      cachedDataType="numeric"
+                      cachedName="buyPrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[buyPrice]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[buyPrice]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2].Columns[MSRP]"
+                      cachedDataType="numeric"
+                      cachedName="MSRP"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[MSRP]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[MSRP]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3]"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[productCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="productCode"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[productName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="70"
+                      cachedName="productName"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[productLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productLine"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productLine]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productLine]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[productscale]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="productscale"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productscale]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productscale]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[productVendor]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="productVendor"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productVendor]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productVendor]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[productDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="productDescription"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[productDescription]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productDescription]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[quantityInStock]"
+                      cachedDataType="i2"
+                      cachedName="quantityInStock"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[quantityInStock]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[quantityInStock]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[buyPrice]"
+                      cachedDataType="numeric"
+                      cachedName="buyPrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[buyPrice]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[buyPrice]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3].Columns[MSRP]"
+                      cachedDataType="numeric"
+                      cachedName="MSRP"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[MSRP]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[MSRP]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 4]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 4">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productCode]"
+                      name="productCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="70"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productName]"
+                      name="productName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productLine]"
+                      name="productLine" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productscale]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productscale]"
+                      name="productscale" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productVendor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productVendor]"
+                      name="productVendor" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productDescription]"
+                      codePage="1252"
+                      dataType="text"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[productDescription]"
+                      name="productDescription" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[quantityInStock]"
+                      dataType="i2"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[quantityInStock]"
+                      name="quantityInStock" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[buyPrice]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[buyPrice]"
+                      name="buyPrice"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[MSRP]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1].Columns[MSRP]"
+                      name="MSRP"
+                      precision="10"
+                      scale="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[buyPrice is -ve]"
+              endId="Package\Data Flow Task\buyPrice -ve to +ve.Inputs[Derived Column Input]"
+              name="buyPrice is -ve"
+              startId="Package\Data Flow Task\Conditional Split.Outputs[buyPrice is -ve]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Conditional Split Default Output]"
+              endId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 2]"
+              name="Conditional Split Default Output"
+              startId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Default Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 1]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\buyPrice -ve to +ve.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output1]"
+              endId="Package\Data Flow Task\Union All 1.Inputs[Union All Input 3]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\MSRP -ve to +ve.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Lookup Match Output]"
+              endId="Package\Data Flow Task\Union All.Inputs[Union All Input 1]"
+              name="Lookup Match Output"
+              startId="Package\Data Flow Task\Lookup_Column_productLine.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Lookup Match Output1]"
+              endId="Package\Data Flow Task\Union All.Inputs[Union All Input 2]"
+              name="Lookup Match Output"
+              startId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[MSRP is -ve]"
+              endId="Package\Data Flow Task\MSRP -ve to +ve.Inputs[Derived Column Input]"
+              name="MSRP is -ve"
+              startId="Package\Data Flow Task\Conditional Split.Outputs[MSRP is -ve]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output1]"
+              endId="Package\Data Flow Task\Lookup_Column_productLine.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\sales_au_nz_product.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Sort Output]"
+              endId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+              name="Sort Output"
+              startId="Package\Data Flow Task\Sort.Outputs[Sort Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Union All Output 1]"
+              endId="Package\Data Flow Task\Sort.Inputs[Sort Input]"
+              name="Union All Output 1"
+              startId="Package\Data Flow Task\Union All.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Union All Output 11]"
+              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Union All Output 1"
+              startId="Package\Data Flow Task\Union All 1.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\Data Flow Task"
+          TopLeft="127,94" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\Data Flow Task\Lookup_Column_productLine"
+          TopLeft="41,130.133333705266" />
+        <NodeLayout
+          Size="176.8,41.6"
+          Id="Package\Data Flow Task\sales_au_nz_product"
+          TopLeft="41.1666651765509,36.6666666666667" />
+        <NodeLayout
+          Size="142.4,41.6"
+          Id="Package\Data Flow Task\Conditional Split"
+          TopLeft="358,354.4" />
+        <NodeLayout
+          Size="94.4,41.6"
+          Id="Package\Data Flow Task\Sort"
+          TopLeft="307.333333333333,276.4" />
+        <NodeLayout
+          Size="140.8,41.6"
+          Id="Package\Data Flow Task\OLE DB Source"
+          TopLeft="486.666666666667,22.6666666666667" />
+        <NodeLayout
+          Size="107.2,41.6"
+          Id="Package\Data Flow Task\Lookup"
+          TopLeft="526,122.666666666667" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="557.066666666667,64.2666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="22.5333333333333,58.4000000000001"
+              Start="0,0"
+              End="22.5333333333333,50.9000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.2" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.2"
+                    Point2="0,29.2"
+                    Point3="4,29.2" />
+                  <mssgle:LineSegment
+                    End="18.5333333333333,29.2" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.5333333333333,29.2"
+                    Point2="22.5333333333333,29.2"
+                    Point3="22.5333333333333,33.2" />
+                  <mssgle:LineSegment
+                    End="22.5333333333333,50.9000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output1]"
+          TopLeft="129.566665176551,78.2666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="18.6333348234492,51.8666670385998"
+              Start="0,0"
+              End="18.6333348234492,44.3666670385998">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.9333335192999" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.9333335192999"
+                    Point2="0,25.9333335192999"
+                    Point3="4,25.9333335192999" />
+                  <mssgle:LineSegment
+                    End="14.6333348234492,25.9333335192999" />
+                  <mssgle:CubicBezierSegment
+                    Point1="14.6333348234492,25.9333335192999"
+                    Point2="18.6333348234492,25.9333335192999"
+                    Point3="18.6333348234492,29.9333335192999" />
+                  <mssgle:LineSegment
+                    End="18.6333348234492,44.3666670385998" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="113.6,41.6"
+          Id="Package\Data Flow Task\Union All"
+          TopLeft="358,198" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Lookup Match Output]"
+          TopLeft="148.2,171.733333705266">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="266.6,26.2666662947335"
+              Start="0,0"
+              End="266.6,18.7666662947335">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.13333314736676" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.13333314736676"
+                    Point2="0,13.1333331473668"
+                    Point3="4,13.1333331473668" />
+                  <mssgle:LineSegment
+                    End="262.6,13.1333331473668" />
+                  <mssgle:CubicBezierSegment
+                    Point1="262.6,13.1333331473668"
+                    Point2="266.6,13.1333331473668"
+                    Point3="266.6,17.1333331473668" />
+                  <mssgle:LineSegment
+                    End="266.6,18.7666662947335" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="85.10861328125,18.1333331473668,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Lookup Match Output1]"
+          TopLeft="579.6,164.266666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-147.2,33.7333333333333"
+              Start="0,0"
+              End="-147.2,26.2333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.9588888888888" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.9588888888888"
+                    Point2="0,19.9588888888888"
+                    Point3="-4,19.9588888888888" />
+                  <mssgle:LineSegment
+                    End="-143.2,19.9588888888888" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-143.2,19.9588888888888"
+                    Point2="-147.2,19.9588888888888"
+                    Point3="-147.2,23.9588888888888" />
+                  <mssgle:LineSegment
+                    End="-147.2,26.2333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-121.79138671875,24.9588888888888,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Union All Output 1]"
+          TopLeft="414.8,239.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-60.2666666666668,36.7999999999999"
+              Start="0,0"
+              End="-60.2666666666668,29.2999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.4" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.4"
+                    Point2="0,18.4"
+                    Point3="-4,18.4" />
+                  <mssgle:LineSegment
+                    End="-56.2666666666668,18.4" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-56.2666666666668,18.4"
+                    Point2="-60.2666666666668,18.4"
+                    Point3="-60.2666666666668,22.4" />
+                  <mssgle:LineSegment
+                    End="-60.2666666666668,29.2999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Sort Output]"
+          TopLeft="354.533333333333,318">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="74.6666666666669,36.3999999999999"
+              Start="0,0"
+              End="74.6666666666669,28.8999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.1999999999999" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.1999999999999"
+                    Point2="0,18.1999999999999"
+                    Point3="4,18.1999999999999" />
+                  <mssgle:LineSegment
+                    End="70.6666666666669,18.1999999999999" />
+                  <mssgle:CubicBezierSegment
+                    Point1="70.6666666666669,18.1999999999999"
+                    Point2="74.6666666666669,18.1999999999999"
+                    Point3="74.6666666666669,22.1999999999999" />
+                  <mssgle:LineSegment
+                    End="74.6666666666669,28.8999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Data Flow Task\buyPrice -ve to +ve"
+          TopLeft="614.666666666667,356" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[buyPrice is -ve]"
+          TopLeft="500.4,376">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="114.266666666667,0"
+              Start="0,0"
+              End="106.766666666667,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="106.766666666667,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="20.7253645833333,5,65.3159375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="120.8,41.6"
+          Id="Package\Data Flow Task\Union All 1"
+          TopLeft="393.333333333333,494.933333333333" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="691.466666666667,397.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-237.733333333333,97.3333333333332"
+              Start="0,0"
+              End="-237.733333333333,89.8333333333332">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.6666666666666" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44.6666666666666"
+                    Point2="0,48.6666666666666"
+                    Point3="-4,48.6666666666666" />
+                  <mssgle:LineSegment
+                    End="-233.733333333333,48.6666666666666" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-233.733333333333,48.6666666666666"
+                    Point2="-237.733333333333,48.6666666666666"
+                    Point3="-237.733333333333,52.6666666666666" />
+                  <mssgle:LineSegment
+                    End="-237.733333333333,89.8333333333332" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Conditional Split Default Output]"
+          TopLeft="406.8,396">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="28.1333333333332,98.9333333333334"
+              Start="0,0"
+              End="28.1333333333332,91.4333333333334">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.3461273262216" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,45.3461273262216"
+                    Point2="0,49.3461273262216"
+                    Point3="4,49.3461273262216" />
+                  <mssgle:LineSegment
+                    End="24.1333333333332,49.3461273262216" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.1333333333332,49.3461273262216"
+                    Point2="28.1333333333332,49.3461273262216"
+                    Point3="28.1333333333332,53.3461273262216" />
+                  <mssgle:LineSegment
+                    End="28.1333333333332,91.4333333333334" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-56.5472395833334,54.3461273262216,141.2278125,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Data Flow Task\OLE DB Destination"
+          TopLeft="152.666666666667,447.333333333333" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Union All Output 11]"
+          TopLeft="393.333333333333,515.733333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-83.8666666666667,-47.5999999999998"
+              Start="0,0"
+              End="-76.3666666666667,-47.5999999999998">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-37.9333333333333,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-37.9333333333333,0"
+                    Point2="-41.9333333333333,0"
+                    Point3="-41.9333333333333,-4" />
+                  <mssgle:LineSegment
+                    End="-41.9333333333333,-43.5999999999998" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-41.9333333333333,-43.5999999999998"
+                    Point2="-41.9333333333333,-47.5999999999998"
+                    Point3="-45.9333333333333,-47.5999999999998" />
+                  <mssgle:LineSegment
+                    End="-76.3666666666667,-47.5999999999998" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="144.8,41.6"
+          Id="Package\Data Flow Task\MSRP -ve to +ve"
+          TopLeft="764,280.666666666667" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[MSRP is -ve]"
+          TopLeft="451.6,354.4">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="362,-32.1333333333331"
+              Start="0,0"
+              End="362,-24.6333333333331">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-12.0703054460901" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-12.0703054460901"
+                    Point2="0,-16.0703054460901"
+                    Point3="4,-16.0703054460901" />
+                  <mssgle:LineSegment
+                    End="358,-16.0703054460901" />
+                  <mssgle:CubicBezierSegment
+                    Point1="358,-16.0703054460901"
+                    Point2="362,-16.0703054460901"
+                    Point3="362,-20.0703054460901" />
+                  <mssgle:LineSegment
+                    End="362,-24.6333333333331" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="154.55865234375,-11.0703054460901,52.8826953125,9.5341796875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output1]"
+          TopLeft="859.2,322.266666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-377.266666666667,172.666666666667"
+              Start="0,0"
+              End="-377.266666666667,165.166666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,93.1034455140237" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,93.1034455140237"
+                    Point2="0,97.1034455140237"
+                    Point3="-4,97.1034455140237" />
+                  <mssgle:LineSegment
+                    End="-373.266666666667,97.1034455140237" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-373.266666666667,97.1034455140237"
+                    Point2="-377.266666666667,97.1034455140237"
+                    Point3="-377.266666666667,101.103445514024" />
+                  <mssgle:LineSegment
+                    End="-377.266666666667,165.166666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Lookup_Column_productLine">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[salemodels].[productlines]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
